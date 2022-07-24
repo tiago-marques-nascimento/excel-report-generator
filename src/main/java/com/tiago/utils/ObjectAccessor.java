@@ -1,6 +1,9 @@
 package com.tiago.utils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,14 +19,50 @@ public class ObjectAccessor {
         return this.object.toString();
     }
 
-    public Optional<ObjectAccessor> access(String field) {
+    public String getValueFromDate(String format) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        if(this.object instanceof LocalDate) {
+            return ((LocalDate)this.object).format(formatter);
+        } else if(this.object instanceof LocalDateTime) {
+            return ((LocalDateTime)this.object).format(formatter);
+        } else {
+            return null;
+        }
+    }
+
+    public Integer getValueAsInteger() {
+        return Integer.parseInt(this.object.toString());
+    }
+
+    public Double getValueAsDouble() {
+        return Double.parseDouble(this.object.toString());
+    }
+
+    public Optional<ObjectAccessor> access(String methodOrField) {
         try {
-            return Optional.of(new ObjectAccessor(
-                object.getClass()
-                    .getMethod("get" +
-                        field.substring(0, 1).toUpperCase() +
-                        field.substring(1))
-                    .invoke(this.object)));
+
+            try {
+                return Optional.of(new ObjectAccessor(
+                    object.getClass()
+                        .getMethod(methodOrField)
+                        .invoke(this.object)
+                ));
+            } catch (
+                IllegalAccessException |
+                IllegalArgumentException |
+                InvocationTargetException |
+                NoSuchMethodException |
+                SecurityException e
+            ) {
+                return Optional.of(new ObjectAccessor(
+                    object.getClass()
+                        .getMethod("get" +
+                            methodOrField.substring(0, 1).toUpperCase() +
+                            methodOrField.substring(1))
+                        .invoke(this.object)
+                ));
+            }
+
         } catch (
             IllegalAccessException |
             IllegalArgumentException |
