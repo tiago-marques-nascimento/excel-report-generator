@@ -3,16 +3,22 @@ package com.tiago.datasource;
 import java.util.List;
 
 public class DataSource {
-    private List<Programmer> programmers;
+    private String title;
+    private List<Student> students;
 
-    public void setProgrammers(final List<Programmer> programmers) {
-        this.programmers = programmers;
+    public DataSource(
+        final String title,
+        final List<Student> students
+    ) {
+        this.title = title;
+        this.students = students;
     }
 
-    public List<Programmer> getProgrammers() {
-        return this.programmers;
+    public String getTitle() {
+        return this.title;
     }
 
-    public DataSource() {
+    public List<Student> getStudents() {
+        return this.students;
     }
 }

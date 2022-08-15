@@ -20,9 +20,6 @@ import java.util.regex.Pattern;
 
 public final class SpreadSheetWriter {
 
-    private SpreadSheetWriter() {
-    }
-
     private static class MatchToStringParser {
         private final String value;
         private final String pipe;
@@ -200,7 +197,7 @@ public final class SpreadSheetWriter {
         }
     }
 
-    public void write(
+    public static void write(
         Optional<String> noDataLabel,
         String templateName,
         Object dataSource
