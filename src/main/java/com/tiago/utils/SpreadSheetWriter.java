@@ -436,7 +436,7 @@ public final class SpreadSheetWriter {
                     spreadSheetAcessor.copyState(subSpreadSheetAcessor);
                 }
             } else {
-                clearSpreadSheetRow(noDataLabel, fromRow, fromColumn, regionColumns, mySheet);
+                clearSpreadSheetRow(noDataLabel, fromRow, fromColumn, regionRows, regionColumns, mySheet);
             }
         });
     }
@@ -709,27 +709,38 @@ public final class SpreadSheetWriter {
         Optional<String> noDataLabel,
         Integer fromRow,
         Integer fromColumn,
+        Integer rowsToClear,
         Integer columnsToClear,
         XSSFSheet mySheet
     ) {
-        XSSFRow row = mySheet.getRow(fromRow);
-        if(noDataLabel.isPresent()) {
-            if(row == null) {
-                row = mySheet.createRow(fromRow);
-            }
-    
-            XSSFCell cell = row.getCell(fromColumn);
-            if(cell == null) {
-                cell = row.createCell(fromColumn);
-            }
-    
-            cell.setCellValue(noDataLabel.get());
-        }
 
-        if(row != null) {
-            for(Integer column = fromColumn + (noDataLabel.isPresent() ? 1 : 0); column < fromColumn + columnsToClear; column++) {
-                XSSFCell cell = row.getCell(column);
-                cell.setBlank();
+        for(Integer row = fromRow; row < fromRow + rowsToClear; row++) {
+
+            XSSFRow cellsRow = mySheet.getRow(row);
+            if(row == fromRow && noDataLabel.isPresent()) {
+                if(cellsRow == null) {
+                    cellsRow = mySheet.createRow(row);
+                }
+        
+                XSSFCell cell = cellsRow.getCell(fromColumn);
+                if(cell == null) {
+                    cell = cellsRow.createCell(fromColumn);
+                }
+        
+                cell.setCellValue(noDataLabel.get());
+            }
+
+            if(cellsRow != null) {
+                for(Integer column = fromColumn + ((row == fromRow && noDataLabel.isPresent()) ? 1 : 0); column < fromColumn + columnsToClear; column++) {
+                    XSSFCell cell = cellsRow.getCell(column);
+                    if(cell != null) {
+                        cell.setBlank();
+                        if(cell.getCellComment() != null) {
+                            cell.getCellComment().setString("");
+                            cell.removeCellComment();
+                        }
+                    }
+                }
             }
         }
     }

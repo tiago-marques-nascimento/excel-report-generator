@@ -1,21 +1,23 @@
 package com.tiago.datasource;
 
+import java.time.LocalDate;
+
 public class Person {
     private String name;
-    private Integer age;
+    private LocalDate birthDate;
     private String address;
     private String mobile;
     private String email;
 
     public Person(
         final String name,
-        final Integer age,
+        final LocalDate birthDate,
         final String address,
         final String mobile,
         final String email
     ) {
         this.name = name;
-        this.age = age;
+        this.birthDate = birthDate;
         this.address = address;
         this.mobile = mobile;
         this.email = email;
@@ -25,8 +27,8 @@ public class Person {
         return this.name;
     }
 
-    public Integer getAge() {
-        return this.age;
+    public LocalDate getBirthDate() {
+        return this.birthDate;
     }
 
     public String getAddress() {

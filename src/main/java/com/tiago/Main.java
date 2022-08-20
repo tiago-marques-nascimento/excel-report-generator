@@ -1,5 +1,6 @@
 package com.tiago;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class Main {
 
 		Student studentTiago = new Student(
 			"Tiago",
-			32,
+			LocalDate.of(2002, 1, 10),
 			"Rua Antonio Francisco, 672",
 			"(32) 992736726",
 			"tiago@gmail.com",
@@ -26,7 +27,7 @@ public class Main {
 
 		Student studentAnderson = new Student(
 			"Anderson",
-			23,
+			LocalDate.of(1988, 3, 15),
 			"Rua Antonio Francisco, 572",
 			"(32) 992711724",
 			"anderson@gmail.com",
@@ -35,7 +36,7 @@ public class Main {
 
 		Student studentEduardo = new Student(
 			"Eduardo",
-			41,
+			LocalDate.of(2095, 10, 12),
 			"Rua Antonio Francisco, 272",
 			"(32) 992736726",
 			"eduardo@gmail.com",
@@ -44,7 +45,7 @@ public class Main {
 
 		Student studentRafael = new Student(
 			"Rafael",
-			27,
+			LocalDate.of(2000, 5, 10),
 			"Rua Antonio Francisco, 272",
 			"(32) 933336722",
 			"rafael@gmail.com",
@@ -53,7 +54,7 @@ public class Main {
 
 		Student studentTaynara = new Student(
 			"Taynara",
-			25,
+			LocalDate.of(1998, 10, 10),
 			"Rua Antonio Francisco, 172",
 			"(32) 992111116",
 			"taynara@gmail.com",
@@ -62,7 +63,7 @@ public class Main {
 
 		Teacher teacherDiogo = new Teacher(
 			"Diogo",
-			32,
+			LocalDate.of(2005, 9, 23),
 			"Rua Antonio Francisco, 672",
 			"(32) 982736725",
 			"diogo@gmail.com",
@@ -71,7 +72,7 @@ public class Main {
 
 		Teacher teacherLivia = new Teacher(
 			"Livia",
-			52,
+			LocalDate.of(2000, 11, 11),
 			"Rua Antonio Francisco, 972",
 			"(32) 982799925",
 			"livia@gmail.com",
@@ -80,7 +81,7 @@ public class Main {
 
 		Teacher teacherMaria = new Teacher(
 			"Maria",
-			29,
+			LocalDate.of(2004, 5, 17),
 			"Rua Fernando Francisco, 272",
 			"(32) 911136711",
 			"maria@gmail.com",

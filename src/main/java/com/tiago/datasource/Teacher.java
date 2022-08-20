@@ -1,5 +1,6 @@
 package com.tiago.datasource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Teacher extends Person {
@@ -7,7 +8,7 @@ public class Teacher extends Person {
 
     public Teacher(
         final String name,
-        final Integer age,
+        final LocalDate birthDate,
         final String address,
         final String mobile,
         final String email,
@@ -15,7 +16,7 @@ public class Teacher extends Person {
     ) {
         super(
             name,
-            age,
+            birthDate,
             address,
             mobile,
             email
